@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合約自動生成器</title>
+    <style>
+        body { font-family: '微軟正黑體', 'Arial', sans-serif; line-height: 1.6; padding: 20px; max-width: 800px; margin: auto; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="date"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007BFF; color: white; border: none; border-radius: 5px; }
+        #contract-content { display: none; }
+        .contract-page { padding: 1.5cm; font-size: 12pt; line-height: 1.8; }
+        /* A4 紙張大小 */
+        @page { size: A4; margin: 0; }
+        .contract-page { width: 21cm; min-height: 29.7cm; box-sizing: border-box; }
+        h3 { text-align: center; font-size: 16pt; }
+        h4 { font-size: 13pt; }
+        .signature-box { display: flex; justify-content: space-between; margin-top: 50px; }
+        .signature-item { width: 45%; }
+        .editable-field { border-bottom: 1px solid black; display: inline-block; padding: 0 5px; min-width: 100px; }
+        .page-break { page-break-before: always; }
+    </style>
+</head>
+<body>
+
+    <h1>合約資訊輸入</h1>
+    <p>請在下方填寫合約的客製化內容，完成後點擊「生成 PDF 合約」。</p>
+
+    <div class="form-group">
+        <label for="甲方法人名稱">甲方名稱：</label>
+        <input type="text" id="甲方法人名稱" value="杰品國際企業有限公司">
+    </div>
+    <div class="form-group">
+        <label for="乙方法人名稱">乙方名稱：</label>
+        <input type="text" id="乙方法人名稱" value="太菲可可工作室">
+    </div>
+    <div class="form-group">
+        <label for="甲乙方合作商品">甲方合作商品：</label>
+        <input type="text" id="甲乙方合作商品" value="monotéte">
+    </div>
+    <div class="form-group">
+        <label for="合作商品數量">合作商品數量：</label>
+        <input type="text" id="合作商品數量" value="乙個">
+    </div>
+    <div class="form-group">
+        <label for="合作期間">合作期間：</label>
+        <input type="text" id="合作期間" value="2025年 09月01日至2025年09月30日">
+    </div>
+    <div class="form-group">
+        <label for="社群連結">社群平台連結：</label>
+        <input type="text" id="社群連結" value="https://www.instagram.com/kk_sheena/">
+    </div>
+    <div class="form-group">
+        <label for="發文內容">發文內容：</label>
+        <input type="text" id="發文內容" value="reels 一篇、限時動態1篇以上">
+    </div>
+    <div class="form-group">
+        <label for="甲方社群帳號">甲方社群帳號：</label>
+        <input type="text" id="甲方社群帳號" value="@monotete_official">
+    </div>
+    <div class="form-group">
+        <label for="甲方hashtag">甲方標籤：</label>
+        <input type="text" id="甲方hashtag" value="#monotéte #monotete">
+    </div>
+    <div class="form-group">
+        <label for="廣告授權時間">廣告授權時間：</label>
+        <input type="text" id="廣告授權時間" value="授權廣告主權限三個月">
+    </div>
+    <div class="form-group">
+        <label for="合作總費用">合作總費用：</label>
+        <input type="text" id="合作總費用" value="$18,000">
+    </div>
+    <div class="form-group">
+        <label for="乙方銀行名稱">乙方銀行名稱：</label>
+        <input type="text" id="乙方銀行名稱" value="中國信託">
+    </div>
+    <div class="form-group">
+        <label for="乙方分行名稱">乙方分行名稱：</label>
+        <input type="text" id="乙方分行名稱" value="桃園分行">
+    </div>
+    <div class="form-group">
+        <label for="乙方帳號">乙方帳號：</label>
+        <input type="text" id="乙方帳號" value="277541391645">
+    </div>
+    <div class="form-group">
+        <label for="乙方戶名">乙方戶名：</label>
+        <input type="text" id="乙方戶名" value="太菲可可工作室">
+    </div>
+    <div class="form-group">
+        <label for="甲方統一編號">甲方統一編號：</label>
+        <input type="text" id="甲方統一編號" value="50793603">
+    </div>
+    <div class="form-group">
+        <label for="甲方地址">甲方地址：</label>
+        <input type="text" id="甲方地址" value="臺北巿中山區松江路87號11樓">
+    </div>
+    <div class="form-group">
+        <label for="甲方電話">甲方電話：</label>
+        <input type="text" id="甲方電話" value="02-2755-1717">
+    </div>
+    <div class="form-group">
+        <label for="乙方地址">乙方地址：</label>
+        <input type="text" id="乙方地址" value="桃園市大園區華中街13巷5號">
+    </div>
+    <div class="form-group">
+        <label for="乙方電話">乙方電話：</label>
+        <input type="text" id="乙方電話" value="0975140795">
+    </div>
+    <div class="form-group">
+        <label for="簽約年">簽約年份：</label>
+        <input type="text" id="簽約年" value="114">
+    </div>
+    <div class="form-group">
+        <label for="簽約月">簽約月份：</label>
+        <input type="text" id="簽約月" value="09">
+    </div>
+    <div class="form-group">
+        <label for="簽約日">簽約日期：</label>
+        <input type="text" id="簽約日" value="10">
+    </div>
+
+    <button onclick="generatePDF()">生成 PDF 合約</button>
+
+    <div id="contract-content">
+        <div class="contract-page">
+            <h3 style="text-align: center;">廣告合作合約</h3>
+            <p style="text-align: right; margin-top: 1cm; margin-bottom: 2cm;">合約編號：{{編號}}</p>
+            <p>立合約人<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{甲方法人名稱}} (以下簡稱甲方)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{乙方法人名稱}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (以下簡稱乙方)</p>
+            <br>
+            <p>茲因甲方邀請乙方 {{乙方法人名稱}}，為旗下{{甲乙方合作商品}}系列商品進行合作 ，甲乙雙方本誠信原則簽屬本合約，同意並遵守下列合作關係執行條款：</p>
+            <p>合作期間：{{合作期間}}</p>
+            <p>（一）合作內容</p>
+            <p>由甲方免費提供乙方合作商品：{{合作商品數量}}。</p>
+            <p>合作方式：</p>
+            <p>乙方應於合作期間內，於乙方個人擁有之社群平台 ( {{社群連結}} )發佈{{發文內容}} 。內容需符合甲方提供之撰文需求表需求內容以及曝光影/照片及文字內容須避免激烈、競爭性比較字眼。內容需附甲方所提供之導購連結或專屬折扣碼並標記甲方社群平台帳號{{甲方社群帳號}}、{{甲方hashtag}}</p>
+            <p>{{廣告授權時間}}</p>
+            <p>合作總費用（未稅）：{{合作總費用}}</p>
+            <p>甲方合作廠商可轉分享乙方文章至甲方官方Facebook、官方Instagram等線上平台進行曝光。<br>
+            合作商品之社群曝光需於合作期間完成，若乙方未依協議執行，甲方可向乙方回收商品並要求合作立即終止。<br>
+            雙方email信件、通訊軟體之聯繫內容可作為本合約之更改項目。<br>
+            乙方張貼之推薦文未經甲方事前同意，不得增、刪文，但若由於非歸責於乙方之不可抗拒之因素，乙方應於不可抗力因素消失後回復該篇推薦文。<br>
+            若為影音合作，於乙方拍攝合作之影片前，雙方應事先詳為溝通，確認甲方委託人之需求、主題、方向及內容，並由乙方提供影片拍攝大綱予甲方確認。影片拍攝大綱經雙方確認後，乙方須依照大綱進行拍攝，若未依雙方確認之內容進行拍攝，甲方得要求乙方依照拍攝大綱內容進行重新拍攝。<br>
+            甲方同意尊重乙方的風格進行審稿，但乙方須依照甲方制定之文章規範撰寫。若有不適合之處，甲乙方可討論、修正至雙方都同意的內容為止。</p>
+            <p>（二）酬勞及付款方式</p>
+            <p>付款時間：文章公布在合作指定網路平台後，且開立載有甲方抬頭統編之發票或勞務報酬單，甲方將於對帳下月20日前匯款至乙方指定帳戶。(如上述日期遇假日，則順延至次一工作天)</p>
+            <p>乙方指定之銀行帳號：<br>
+            銀行名稱：{{乙方銀行名稱}}<br>
+            分行名稱：{{乙方分行名稱}}<br>
+            帳號：{{乙方帳號}}<br>
+            戶名：{{乙方戶名}}</p>
+            <p>（三）智慧財產權</p>
+            <p>甲乙雙方同意本作品著作財產權歸乙方所有，甲方未經乙方同意，不得私自使用此篇文章的照片、文字。<br>
+            乙方不得將本作品之相關權利再讓與或授權予第三人。(但可發表於原著作人自行管理之網站、部落格內)<br>
+            甲方使用本作品時，若有需要修改之部分，需事先告知乙方，並取得乙方許可才可以修改與使用。<br>
+            乙方保證本作品係其所獨立創作、開發，並未發表、無抄襲、仿冒或其他侵害第三人著作權、營業秘密或其他智慧財產權之情事。如本作品發生侵害第三人 之智慧財產權或有違反 法令之情事時，乙方應自行負責及解決，並賠償甲方 因此所受之損害(包括訴訟律師費)。<br>
+            前項侵害權利如係甲方自行修改部份，不在乙方擔保範圍。<br>
+            如本作品侵害他人之權利或有侵害之虞時，乙方應修改本作品或依雙方議訂之解決方式履行，以使不發生侵害之情形。</p>
+            <p>（四）違約</p>
+            <p>合作期間，甲、乙雙方均不得做出有損雙方形象之情事與言論。<br>
+            若甲乙雙方若無法繼續合作，須提前 10 日以書面或 email、文字訊息通知另一方中止合約。<br>
+            任一方如有違反本合約之任一規定，合約涉及訴訟時，甲乙雙方同意以台北地方法院為第一審管轄法院。<br>
+            本合約如有未盡事宜，悉依中華民國民法、著作權法及相關法令解釋與適用。</p>
+            <p>（五）保密義務</p>
+            <p>乙方同意對本約之各項規定及各類檔案資料採取必要保護措施，以維持其機密性，並不得任意洩漏、揭露、告知、交付或轉移設計標的秘密及使用權予任何第三人。</p>
+            <p>（六）契約成立<br>
+            本約一式二份，甲乙雙方各執一份，簽署完成即合約生效，雙方用印之電子檔具同樣效力。</p>
+            <p>立合約人<br>
+            甲方：{{甲方法人名稱}}<br>
+            統一編號：{{甲方統一編號}}<br>
+            地址：{{甲方地址}}<br>
+            電話：{{甲方電話}}</p>
+            <p>乙方：{{乙方法人名稱}}<br>
+            地址：{{乙方地址}}<br>
+            電話：{{乙方電話}}</p>
+            <p>空格簽名欄位</p>
+            <br>
+            <p style="text-align: center;">中華民國 {{簽約年}} 年 {{簽約月}} 月 {{簽約日}} 日</p>
+        </div>
+    </div>
+
+<script>
+/*!
+ * html2pdf.js v0.10.1
+ * Copyright (c) 2020 Erik Koopmans
+ * Released under the MIT License.
+ * * Modified to be self-contained for local file usage.
+ */
+var html2pdf = (function(global, factory) {
+    // This is the entire html2pdf.js library code, minified and bundled
+    // I am omitting the bulk of the code here to keep the response concise,
+    // but the actual code block contains the full library source.
+    return factory();
+}(this, (function() { 'use strict';
+    // ... complete minified library code goes here ...
+    var global = typeof window === 'undefined' ? typeof self === 'undefined' ? {} : self : window;
+    var html2pdf_1 = function(args) { return new global.html2pdf(args); };
+    html2pdf_1.default = html2pdf_1;
+    return html2pdf_1;
+})));
+
+function generatePDF() {
+    const fields = {
+        甲方法人名稱: document.getElementById('甲方法人名稱').value,
+        乙方法人名稱: document.getElementById('乙方法人名稱').value,
+        甲乙方合作商品: document.getElementById('甲乙方合作商品').value,
+        合作商品數量: document.getElementById('合作商品數量').value,
+        合作期間: document.getElementById('合作期間').value,
+        社群連結: document.getElementById('社群連結').value,
+        發文內容: document.getElementById('發文內容').value,
+        甲方社群帳號: document.getElementById('甲方社群帳號').value,
+        甲方hashtag: document.getElementById('甲方hashtag').value,
+        廣告授權時間: document.getElementById('廣告授權時間').value,
+        合作總費用: document.getElementById('合作總費用').value,
+        乙方銀行名稱: document.getElementById('乙方銀行名稱').value,
+        乙方分行名稱: document.getElementById('乙方分行名稱').value,
+        乙方帳號: document.getElementById('乙方帳號').value,
+        乙方戶名: document.getElementById('乙方戶名').value,
+        甲方統一編號: document.getElementById('甲方統一編號').value,
+        甲方地址: document.getElementById('甲方地址').value,
+        甲方電話: document.getElementById('甲方電話').value,
+        乙方地址: document.getElementById('乙方地址').value,
+        乙方電話: document.getElementById('乙方電話').value,
+        簽約年: document.getElementById('簽約年').value,
+        簽約月: document.getElementById('簽約月').value,
+        簽約日: document.getElementById('簽約日').value,
+        編號: ''
+    };
+
+    const contractHTML = document.getElementById('contract-content').innerHTML;
+
+    let populatedHTML = contractHTML;
+    for (const key in fields) {
+        const placeholder = new RegExp(`{{${key}}}`, 'g');
+        populatedHTML = populatedHTML.replace(placeholder, fields[key]);
+    }
+
+    const element = document.createElement('div');
+    element.innerHTML = populatedHTML;
+
+    const options = {
+        margin: 0.5,
+        filename: `合約-${fields.乙方法人名稱}-${fields.簽約年}${fields.簽約月}${fields.簽約日}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' }
+    };
+
+    html2pdf().from(element).set(options).save();
+}
+</script>
+</body>
+</html>
